@@ -17,18 +17,18 @@ fn sample_sphere(c: &mut Criterion) {
             },
             {
                 let mut rng = rand::weak_rng();
+                Fun::new("marsaglia", move |b, _| b.iter(
+                    || sample_sphere::marsaglia(&mut rng)))
+            },
+            {
+                let mut rng = rand::weak_rng();
                 Fun::new("spherical", move |b, _| b.iter(
                     || sample_sphere::spherical(&mut rng)))
             },
             {
                 let mut rng = rand::weak_rng();
-                Fun::new("trigonometric", move |b, _| b.iter(
-                    || sample_sphere::trigonometric(&mut rng)))
-            },
-            {
-                let mut rng = rand::weak_rng();
-                Fun::new("marsaglia", move |b, _| b.iter(
-                    || sample_sphere::marsaglia(&mut rng)))
+                Fun::new("normal", move |b, _| b.iter(
+                    || sample_sphere::normal(&mut rng)))
             },
             {
                 let mut rng = rand::weak_rng();
@@ -37,8 +37,8 @@ fn sample_sphere(c: &mut Criterion) {
             },
             {
                 let mut rng = rand::weak_rng();
-                Fun::new("normal", move |b, _| b.iter(
-                    || sample_sphere::normal(&mut rng)))
+                Fun::new("trigonometric", move |b, _| b.iter(
+                    || sample_sphere::trigonometric(&mut rng)))
             },
         ],
         ());
