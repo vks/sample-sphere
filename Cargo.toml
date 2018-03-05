@@ -5,3 +5,10 @@ version = "0.1.0"
 
 [dependencies]
 rand = "0.4"
+
+[dev-dependencies]
+criterion = "0.2"
+
+[[bench]]
+name = "basic"
+harness = false
