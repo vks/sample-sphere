@@ -2,6 +2,7 @@
 authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
 name = "sample-sphere"
 version = "0.1.0"
+license = "MIT/Apache-2.0"
 
 [dependencies]
 rand = "0.4"
