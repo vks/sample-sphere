@@ -5,38 +5,38 @@ extern crate rand;
 extern crate sample_sphere;
 
 use criterion::{Criterion, Fun};
-use rand::Rng;
+use rand::{Rng, FromEntropy};
 
 fn sample_sphere(c: &mut Criterion) {
     c.bench_functions("sample_sphere",
         vec![
             {
-                let mut rng = rand::weak_rng();
+                let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("rng_overhead", move |b, _| b.iter(
-                    || [rng.next_f64(), rng.next_f64()]))
+                    || [rng.gen::<f64>(), rng.gen::<f64>()]))
             },
             {
-                let mut rng = rand::weak_rng();
+                let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("marsaglia", move |b, _| b.iter(
                     || sample_sphere::marsaglia(&mut rng)))
             },
             {
-                let mut rng = rand::weak_rng();
+                let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("spherical", move |b, _| b.iter(
                     || sample_sphere::spherical(&mut rng)))
             },
             {
-                let mut rng = rand::weak_rng();
+                let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("normal", move |b, _| b.iter(
                     || sample_sphere::normal(&mut rng)))
             },
             {
-                let mut rng = rand::weak_rng();
+                let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("cook_neumann", move |b, _| b.iter(
                     || sample_sphere::cook_neumann(&mut rng)))
             },
             {
-                let mut rng = rand::weak_rng();
+                let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("trigonometric", move |b, _| b.iter(
                     || sample_sphere::trigonometric(&mut rng)))
             },

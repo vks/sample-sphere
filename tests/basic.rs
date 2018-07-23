@@ -2,6 +2,8 @@ extern crate rand;
 
 extern crate sample_sphere;
 
+use rand::FromEntropy;
+
 /// Assert that two numbers are almost equal to each other.
 ///
 /// On panic, this macro will print the values of the expressions with their
@@ -18,11 +20,11 @@ macro_rules! assert_almost_eq {
     );
 }
 
-macro_rules! make_basic_test {
+macro_rules! make_norm_test {
     ($name:ident, $fun:path) => (
         #[test]
         fn $name() {
-            let mut rng = rand::weak_rng();
+            let mut rng = rand::rngs::SmallRng::from_entropy();
             for _ in 0..1000 {
                 let x = $fun(&mut rng);
                 assert_almost_eq!(x[0]*x[0] + x[1]*x[1] + x[2]*x[2], 1., 1e-15);
@@ -39,8 +41,10 @@ fn from_spherical<R: rand::Rng>(rng: &mut R) -> [f64; 3] {
     sample_sphere::spherical_to_cartesian([1., theta, phi])
 }
 
-make_basic_test!(spherical, from_spherical);
-make_basic_test!(trigonometric, sample_sphere::trigonometric);
-make_basic_test!(marsaglia, sample_sphere::marsaglia);
-make_basic_test!(cook_neumann, sample_sphere::cook_neumann);
-make_basic_test!(normal, sample_sphere::normal);
+make_norm_test!(spherical_norm, from_spherical);
+make_norm_test!(trigonometric_norm, sample_sphere::trigonometric);
+make_norm_test!(marsaglia_norm, sample_sphere::marsaglia);
+make_norm_test!(cook_neumann_norm, sample_sphere::cook_neumann);
+make_norm_test!(normal_norm, sample_sphere::normal);
+
+

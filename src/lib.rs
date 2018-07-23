@@ -3,13 +3,13 @@ extern crate rand;
 use std::f64::consts::PI;
 
 use rand::Rng;
-use rand::distributions::{IndependentSample, Range, Normal};
+use rand::distributions::{Distribution, Uniform, Normal};
 
 /// Sample the unit sphere in spherical coordinates (theta, phi).
 #[inline]
 pub fn spherical<R: Rng>(rng: &mut R) -> [f64; 2] {
-    let range = Range::new(0., 1.);
-    let (u, v) = (range.ind_sample(rng), range.ind_sample(rng));
+    let uniform = Uniform::new(0., 1.);
+    let (u, v) = (uniform.sample(rng), uniform.sample(rng));
     [2.*PI*u, (2.*v - 1.).acos()]
 }
 
@@ -23,9 +23,9 @@ pub fn spherical_to_cartesian(x: [f64; 3]) -> [f64; 3] {
 /// Sample the unit sphere in three Cartesian dimensions.
 #[inline]
 pub fn trigonometric<R: Rng>(rng: &mut R) -> [f64; 3] {
-    let range01 = Range::new(0., 1.);
-    let range11 = Range::new(-1., 1.);
-    let (u, v) = (range11.ind_sample(rng), range01.ind_sample(rng));
+    let uniform01 = Uniform::new(0., 1.);
+    let uniform11 = Uniform::new(-1., 1.);
+    let (u, v) = (uniform11.sample(rng), uniform01.sample(rng));
     let theta = 2.*PI*v;
     let (s, c) = theta.sin_cos();
     let factor = (1.0_f64 - u*u).sqrt();
@@ -35,10 +35,10 @@ pub fn trigonometric<R: Rng>(rng: &mut R) -> [f64; 3] {
 /// Sample the unit sphere in three Cartesian dimensions.
 #[inline]
 pub fn marsaglia<R: Rng>(rng: &mut R) -> [f64; 3] {
-    let range = Range::new(-1., 1.);
+    let uniform = Uniform::new(-1., 1.);
 
     loop {
-        let (x1, x2) = (range.ind_sample(rng), range.ind_sample(rng));
+        let (x1, x2) = (uniform.sample(rng), uniform.sample(rng));
         let (x1_sq, x2_sq) = (x1*x1, x2*x2);
         let sum = x1_sq + x2_sq;
         if sum >= 1. {
@@ -52,11 +52,11 @@ pub fn marsaglia<R: Rng>(rng: &mut R) -> [f64; 3] {
 /// Sample the unit sphere in three Cartesian dimensions.
 #[inline]
 pub fn cook_neumann<R: Rng>(rng: &mut R) -> [f64; 3] {
-    let range = Range::new(-1., 1.);
+    let uniform = Uniform::new(-1., 1.);
     loop {
         let (x0, x1, x2, x3) =
-            (range.ind_sample(rng), range.ind_sample(rng),
-             range.ind_sample(rng), range.ind_sample(rng));
+            (uniform.sample(rng), uniform.sample(rng),
+             uniform.sample(rng), uniform.sample(rng));
         let (x0_sq, x1_sq, x2_sq, x3_sq) = (x0*x0, x1*x1, x2*x2, x3*x3);
         let sum = x0_sq + x1_sq + x2_sq + x3_sq;
         if sum >= 1. {
@@ -76,7 +76,7 @@ pub fn cook_neumann<R: Rng>(rng: &mut R) -> [f64; 3] {
 pub fn normal<R: Rng>(rng: &mut R) -> [f64; 3] {
     let dist = Normal::new(0., 1.);
     let (x, y, z) =
-        (dist.ind_sample(rng), dist.ind_sample(rng), dist.ind_sample(rng));
+        (dist.sample(rng), dist.sample(rng), dist.sample(rng));
     let factor = 1. / (x*x + y*y + z*z).sqrt();
     [x * factor, y * factor, z * factor]
 }

@@ -1,15 +1,15 @@
 [package]
 authors = ["Vinzent Steinberg <Vinzent.Steinberg@gmail.com>"]
+license = "MIT/Apache-2.0"
 name = "sample-sphere"
 version = "0.1.0"
-license = "MIT/Apache-2.0"
+
+[[bench]]
+harness = false
+name = "basic"
 
 [dependencies]
-rand = "0.4"
+rand = "0.5"
 
 [dev-dependencies]
 criterion = "0.2"
-
-[[bench]]
-name = "basic"
-harness = false
