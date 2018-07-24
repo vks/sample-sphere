@@ -2,6 +2,7 @@
 
 extern crate rand;
 
-pub mod sphere;
+pub mod sphere_surface;
+pub mod sphere_volume;
 pub mod circle;
 pub mod disk;

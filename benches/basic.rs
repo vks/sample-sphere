@@ -6,6 +6,7 @@ extern crate sample_sphere;
 
 use criterion::{Criterion, Fun};
 use rand::{Rng, FromEntropy};
+use sample_sphere::sphere_surface;
 
 fn sample_sphere(c: &mut Criterion) {
     c.bench_functions("sample_sphere",
@@ -18,27 +19,27 @@ fn sample_sphere(c: &mut Criterion) {
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("marsaglia", move |b, _| b.iter(
-                    || sample_sphere::sphere::marsaglia(&mut rng)))
+                    || sphere_surface::marsaglia(&mut rng)))
             },
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("spherical", move |b, _| b.iter(
-                    || sample_sphere::sphere::spherical(&mut rng)))
+                    || sphere_surface::spherical(&mut rng)))
             },
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("normal", move |b, _| b.iter(
-                    || sample_sphere::sphere::normal(&mut rng)))
+                    || sphere_surface::normal(&mut rng)))
             },
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("cook_neumann", move |b, _| b.iter(
-                    || sample_sphere::sphere::cook_neumann(&mut rng)))
+                    || sphere_surface::cook_neumann(&mut rng)))
             },
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("trigonometric", move |b, _| b.iter(
-                    || sample_sphere::sphere::trigonometric(&mut rng)))
+                    || sphere_surface::trigonometric(&mut rng)))
             },
         ],
         ());
