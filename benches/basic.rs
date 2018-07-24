@@ -18,27 +18,27 @@ fn sample_sphere(c: &mut Criterion) {
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("marsaglia", move |b, _| b.iter(
-                    || sample_sphere::marsaglia(&mut rng)))
+                    || sample_sphere::sphere::marsaglia(&mut rng)))
             },
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("spherical", move |b, _| b.iter(
-                    || sample_sphere::spherical(&mut rng)))
+                    || sample_sphere::sphere::spherical(&mut rng)))
             },
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("normal", move |b, _| b.iter(
-                    || sample_sphere::normal(&mut rng)))
+                    || sample_sphere::sphere::normal(&mut rng)))
             },
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("cook_neumann", move |b, _| b.iter(
-                    || sample_sphere::cook_neumann(&mut rng)))
+                    || sample_sphere::sphere::cook_neumann(&mut rng)))
             },
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("trigonometric", move |b, _| b.iter(
-                    || sample_sphere::trigonometric(&mut rng)))
+                    || sample_sphere::sphere::trigonometric(&mut rng)))
             },
         ],
         ());

@@ -35,16 +35,16 @@ macro_rules! make_norm_test {
 
 #[inline]
 fn from_spherical<R: rand::Rng>(rng: &mut R) -> [f64; 3] {
-    let y = sample_sphere::spherical(rng);
+    let y = sample_sphere::sphere::spherical(rng);
     let theta = y[0];
     let phi = y[1];
-    sample_sphere::spherical_to_cartesian([1., theta, phi])
+    sample_sphere::sphere::spherical_to_cartesian([1., theta, phi])
 }
 
 make_norm_test!(spherical_norm, from_spherical);
-make_norm_test!(trigonometric_norm, sample_sphere::trigonometric);
-make_norm_test!(marsaglia_norm, sample_sphere::marsaglia);
-make_norm_test!(cook_neumann_norm, sample_sphere::cook_neumann);
-make_norm_test!(normal_norm, sample_sphere::normal);
+make_norm_test!(trigonometric_norm, sample_sphere::sphere::trigonometric);
+make_norm_test!(marsaglia_norm, sample_sphere::sphere::marsaglia);
+make_norm_test!(cook_neumann_norm, sample_sphere::sphere::cook_neumann);
+make_norm_test!(normal_norm, sample_sphere::sphere::normal);
 
 
