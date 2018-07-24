@@ -1,9 +1,11 @@
+//! Sample the unit sphere surface.
+
 use std::f64::consts::PI;
 
 use rand::Rng;
 use rand::distributions::{Distribution, Uniform, Normal};
 
-/// Sample the unit sphere in spherical coordinates (theta, phi).
+/// Sample the unit sphere surface in spherical coordinates (theta, phi).
 #[inline]
 pub fn spherical<R: Rng>(rng: &mut R) -> [f64; 2] {
     let uniform = Uniform::new(0., 1.);
@@ -18,7 +20,7 @@ pub fn spherical_to_cartesian(x: [f64; 3]) -> [f64; 3] {
     [r * theta.cos() * phi.sin(), r * theta.sin() * phi.sin(), r * phi.cos()]
 }
 
-/// Sample the unit sphere in three Cartesian dimensions.
+/// Sample the unit sphere surface in three Cartesian dimensions.
 #[inline]
 pub fn trigonometric<R: Rng>(rng: &mut R) -> [f64; 3] {
     let uniform01 = Uniform::new(0., 1.);
@@ -30,7 +32,7 @@ pub fn trigonometric<R: Rng>(rng: &mut R) -> [f64; 3] {
     [factor * c, factor * s, u]
 }
 
-/// Sample the unit sphere in three Cartesian dimensions.
+/// Sample the unit sphere surface in three Cartesian dimensions.
 #[inline]
 pub fn marsaglia<R: Rng>(rng: &mut R) -> [f64; 3] {
     let uniform = Uniform::new(-1., 1.);
@@ -47,7 +49,7 @@ pub fn marsaglia<R: Rng>(rng: &mut R) -> [f64; 3] {
     }
 }
 
-/// Sample the unit sphere in three Cartesian dimensions.
+/// Sample the unit sphere surface in three Cartesian dimensions.
 #[inline]
 pub fn cook_neumann<R: Rng>(rng: &mut R) -> [f64; 3] {
     let uniform = Uniform::new(-1., 1.);
@@ -69,7 +71,7 @@ pub fn cook_neumann<R: Rng>(rng: &mut R) -> [f64; 3] {
     }
 }
 
-/// Sample the unit sphere in three Cartesian dimensions.
+/// Sample the unit sphere surface in three Cartesian dimensions.
 #[inline]
 pub fn normal<R: Rng>(rng: &mut R) -> [f64; 3] {
     let dist = Normal::new(0., 1.);
