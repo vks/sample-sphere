@@ -22,3 +22,4 @@ macro_rules! make_norm_test {
 
 make_norm_test!(trigonometric_norm, circle::trigonometric);
 make_norm_test!(cook_neumann_norm, circle::cook_neumann);
+make_norm_test!(trigonometric_pythagoras_norm, circle::trigonometric_pythagoras);

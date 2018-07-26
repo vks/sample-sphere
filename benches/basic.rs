@@ -82,6 +82,11 @@ fn sample_circle(c: &mut Criterion) {
             },
             {
                 let mut rng = rand::rngs::SmallRng::from_entropy();
+                Fun::new("trigonometric_pythagoras", move |b, _| b.iter(
+                    || circle::trigonometric_pythagoras(&mut rng)))
+            },
+            {
+                let mut rng = rand::rngs::SmallRng::from_entropy();
                 Fun::new("trigonometric", move |b, _| b.iter(
                     || circle::trigonometric(&mut rng)))
             },
